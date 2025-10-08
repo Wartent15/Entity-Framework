@@ -59,7 +59,7 @@ namespace ConsoleApp1.Migrations
                 b.Property<string>("StudentID")
                     .HasColumnType("int");
 
-                
+
 
                 b.HasKey("Id");
 
@@ -69,7 +69,7 @@ namespace ConsoleApp1.Migrations
 
                 b.ToTable("Course", (string)null);
 
-                 b.ToTable("Student", (string)null);
+                b.ToTable("Student", (string)null);
             });
 
             modelBuilder.Entity("ConsoleApp1.Entities.Instructor", b =>
@@ -142,7 +142,7 @@ namespace ConsoleApp1.Migrations
                 b.ToTable("Review", (string)null);
             });
 
-            
+
 
             modelBuilder.Entity("ConsoleApp1.Entities.Course", b =>
             {

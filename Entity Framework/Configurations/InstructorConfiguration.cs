@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Entity_Framework.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity_Framework.Entities.Configurations
+namespace Entity_Framework.Configurations
 {
     public class InstructorConfiguration : IEntityTypeConfiguration<Instructor>
     {
