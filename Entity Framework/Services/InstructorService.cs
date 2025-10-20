@@ -1,6 +1,7 @@
 ﻿using Entity_Framework.Configurations;
 using Entity_Framework.Entities;
 using Entity_Framework.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,11 @@ namespace Entity_Framework.Services
 {
     public class InstructorServices
     {
-        private readonly InstructorRepository _InstructorRepository;
+        private readonly SchoolContext _InstructorRepository;
 
         public InstructorServices(SchoolContext db)
         {
-            _InstructorRepository = new InstructorRepository(db);
+            _InstructorRepository = db;
         }
 
         public async Task AddAsync(Instructor Instructor)
@@ -70,12 +71,17 @@ namespace Entity_Framework.Services
             await _InstructorRepository.UpdateAsync(Instructor);
         }
 
-        public async Task<List<Instructor>> GetAllAsync()
+        public async Task<List<Instructor>> GetAllAsync(List<Instructor> instructors)
         {
-            var Instructors = await _InstructorRepository.GetAllAsync();
-            return Instructors;
+            var Instructors = await _InstructorRepository.ToListAsync();
+            return instructors;
         }
 
+        public async Task<Instructor> GetByNameAsync(string lastname)
+        {
+            var Instructor = await _InstructorRepository.Instructors.FirstOrDefaultAsync(c => c.LastName == lastname);
+            return Instructor;
+        }
 
     }
 }

@@ -7,16 +7,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Entity_Framework.Services
 {
     public class CourseServices
     {
-        private readonly CourseRepository _CourseRepository;
+        private readonly SchoolContext _CourseRepository;
 
         public CourseServices(SchoolContext db)
         {
-            _CourseRepository = new CourseRepository(db);
+            _CourseRepository = db;
         }
 
         public async Task AddAsync(Course course)
@@ -71,10 +72,15 @@ namespace Entity_Framework.Services
 
         public async Task<List<Course>> GetAllAsync()
         {
-            var courses = await _CourseRepository.GetAllAsync();
+            var courses = await _CourseRepository.ToListAsync();
             return courses;
         }
 
+        public async Task<Course> GetByNameAsync(string name)
+        {
+            var course = await _CourseRepository.Courses.FirstOrDefaultAsync(c => c.Name == name);
+            return course;
+        }
 
     }
 }

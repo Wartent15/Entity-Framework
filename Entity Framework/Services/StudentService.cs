@@ -12,11 +12,11 @@ namespace Entity_Framework.Services
 {
     public class StudentServices
     {
-        private readonly StudentRepository _StudentRepository;
+        private readonly SchoolContext _StudentRepository;
 
         public StudentServices(SchoolContext db)
         {
-            _StudentRepository = new StudentRepository(db);
+            _StudentRepository = db;
         }
 
         public async Task AddAsync(Student student)
@@ -71,13 +71,12 @@ namespace Entity_Framework.Services
 
         public async Task<List<Student>> GetAllAsync()
         {
-            var students = await _StudentRepository.GetAllAsync();
-            return students;
+            var student = await _StudentRepository.ToListAsync();
+            return student;
         }
 
 
     }
 }
 
-    }
-}
+   
